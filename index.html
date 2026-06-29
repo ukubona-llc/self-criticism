@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ukubona · An Attempt at Self-Criticism</title>
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" media="(prefers-color-scheme:light)"/>
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-dark.png" as="image"/>
+<link rel="preload" href="https://abikesa.github.io/logos/assets/ukubona-light.png" as="image"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #08080D; --surface: #0F0F18; --surface2: #16161F; --border: #1E1E2E;
+  --amber: #F59E0B; --amber-dim: #92610A; --amber-glow:#F59E0B22;
+  --text: #E8E8F0; --muted: #7070A0; --faint: #2A2A3A;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Fira Mono', monospace;
+  --radius: 4px;
+}
+
+[data-theme="light"] {
+  --bg: #F2F0EA; --surface: #FFFFFF; --surface2: #EDEAE2; --border: rgba(0,0,0,0.09);
+  --amber: #92610A; --amber-dim: #7A5208; --amber-glow:#92610A18;
+  --text: #18160F; --muted: #6B6555; --faint: #D9D4C8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg); color: var(--text); font-family: var(--sans);
+  font-size: 15px; line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+  transition: background 0.35s, color 0.35s;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky; top: 0; z-index: 300; background: var(--bg);
+  border-bottom: 1px solid var(--border); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); transition: background 0.35s;
+}
+.nav-inner {
+  max-width: 720px; margin: 0 auto; padding: 0 2rem; height: 52px;
+  display: flex; align-items: center; gap: 0.85rem;
+}
+.nav-home {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  flex-shrink: 0; transition: color 0.2s;
+}
+.nav-home:hover { color: var(--amber); }
+.logo-wrap { width: 26px; height: 26px; flex-shrink: 0; position: relative; cursor: default; }
+.logo-wrap img {
+  width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;
+  transition: opacity 0.4s; animation: spin 90s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) { .logo-wrap img { animation: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.logo-dark { opacity: 1; } .logo-light { opacity: 0; }
+[data-theme="light"] .logo-dark { opacity: 0; }
+[data-theme="light"] .logo-light { opacity: 1; }
+.nav-brand { font-family: var(--serif); font-size: 0.92rem; color: var(--text); flex: 1; letter-spacing: -0.01em; }
+.nav-sub { font-family: var(--mono); font-size: 0.55rem; color: var(--muted); letter-spacing: 0.07em; margin-left: 0.4rem; }
+.theme-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 20px;
+  padding: 0.26rem 0.8rem; font-family: var(--mono); font-size: 0.58rem; color: var(--muted);
+  cursor: pointer; letter-spacing: 0.06em; transition: background 0.2s, color 0.2s; flex-shrink: 0;
+}
+.theme-btn:hover { color: var(--text); }
+
+/* ── HEADER ── */
+header { padding: 4rem 2rem 2.5rem; max-width: 720px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+.eyebrow { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+h1 { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.12; font-weight: 400; color: var(--text); margin-bottom: 0.8rem; }
+h1 em { font-style: italic; color: var(--amber); }
+.subtitle { font-size: 0.875rem; color: var(--muted); font-weight: 300; max-width: 560px; line-height: 1.7; }
+
+/* ── MAIN / ESSAY ── */
+main { max-width: 720px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+.essay-section { padding-top: 3rem; }
+.essay-section:first-of-type { padding-top: 2.5rem; }
+
+.essay-num {
+  display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.25rem;
+  font-family: var(--serif); font-size: 1.1rem; color: var(--amber); font-style: italic;
+}
+.essay-num::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.essay-section p {
+  font-size: 0.92rem; line-height: 1.85; color: var(--text); font-weight: 300;
+  margin-bottom: 1.15rem;
+}
+.essay-section p:last-child { margin-bottom: 0; }
+
+.quote-passage {
+  margin: 1.5rem 0; padding: 1.25rem 1.5rem; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-family: var(--serif); font-style: italic; font-size: 0.98rem;
+  line-height: 1.75; color: var(--text);
+}
+.quote-passage p { font-family: var(--serif); font-style: italic; }
+
+.couplet {
+  font-family: var(--serif); font-style: italic; font-size: 1.02rem; color: var(--amber);
+  line-height: 1.7; margin-top: 1rem;
+}
+
+.stanza-block { margin: 1.75rem 0; display: flex; flex-direction: column; gap: 1.1rem; }
+.stanza {
+  font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--text);
+  line-height: 1.65; padding: 0.9rem 1.1rem; background: var(--surface);
+  border-left: 2px solid var(--amber-dim); border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.signature {
+  margin-top: 2rem; text-align: right; font-family: var(--mono); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 4rem; border-top: 1px solid var(--border); padding: 1.5rem 2rem;
+  max-width: 720px; margin-left: auto; margin-right: auto; display: flex;
+  justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+}
+footer .brand { font-family: var(--serif); font-size: 1rem; color: var(--amber); font-style: italic; }
+footer .ts { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; line-height: 1.6; text-align: right; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a class="nav-home" href="https://abikesa.github.io/">Home</a>
+    <div class="logo-wrap" aria-hidden="true">
+      <img class="logo-dark" src="https://abikesa.github.io/logos/assets/ukubona-dark.png" alt=""/>
+      <img class="logo-light" src="https://abikesa.github.io/logos/assets/ukubona-light.png" alt=""/>
+    </div>
+    <div class="nav-brand">Ukubona <span class="nav-sub">· Nietzsche · An Attempt at Self-Criticism</span></div>
+    <button class="theme-btn" id="theme-btn" aria-label="Toggle color theme">light</button>
+  </div>
+</nav>
+
+<header>
+  <p class="eyebrow">Friedrich Nietzsche · Preface to The Birth of Tragedy · 1886</p>
+  <h1>An Attempt at <em>Self-Criticism</em></h1>
+  <p class="subtitle">Written sixteen years after the book it prefaces — Nietzsche turning his own later judgment against his earliest, most youthful claims.</p>
+</header>
+
+<main>
+
+  <div class="essay-section">
+    <div class="essay-num">1</div>
+    <p>Whatever might have been the basis for this dubious book, it must have been a question of the utmost importance and charm, as well as a deeply personal one. Testimony to that effect is the time in which it arose (in spite of which it arose), that disturbing era of the Franco-Prussian war of 1870-71. While the thunderclap of the Battle of Worth was reverberating across Europe, the meditative lover of enigmas whose lot it was to father this book sat somewhere in a corner of the Alps, extremely reflective and perplexed (thus simultaneously very distressed and carefree) and wrote down his thoughts concerning the Greeks, the kernel of that odd and difficult book to which this later preface (or postscript) should be dedicated. A few weeks after that, he found himself under the walls of Metz, still not yet free of the question mark which he had set down beside the alleged "serenity" of the Greeks and of Greek culture, until, in that month of the deepest tension, as peace was being negotiated in Versailles, he finally came to peace with himself and, while slowly recovering from an illness he'd brought back home with him from the field, finished composing the Birth of Tragedy out of the Spirit of Music.</p>
+    <p>—From music? Music and tragedy? The Greeks and the Music of Tragedy? The Greeks and the art work of pessimism? The most successful, most beautiful, most envied people, those with the most encouraging style of life—the Greeks? How can this be? Did they really need tragedy? Even more to the point, did they really need art? And Greek art, what is that, and how did it come about?</p>
+    <p>One can guess from all this just where the great question mark about the worth of existence was placed. Is pessimism necessarily the sign of collapse, destruction, and disaster, of the exhausted and enfeebled instinct, as it was among the Indians, as it is now, to all appearances, among us "modern" peoples and Europeans? Is there a pessimism of the strong? An intellectual inclination for what in existence is hard, dreadful, angry, and problematic, emerging from what is healthy, from overflowing well being, from living existence to the full? Is there perhaps a way of suffering from the very fullness of life, a tempting courage of the keenest sight which demands what is terrible, like an enemy—a worthy enemy—against which it can test its power, from which it will learn what "to fear" means?</p>
+    <p>What does the tragic myth mean precisely for the Greeks of the best, strongest, and bravest age? What about that tremendous phenomenon of the Dionysian? And what about what was born out of the Dionysian—the tragedy? By contrast, what are we to make of what killed tragedy—Socratic morality, dialectic, the satisfaction and serenity of the theoretical man? Could not this very Socratic way be a sign of collapse, exhaustion, sickness, and the dissolution of the anarchic instinct? And could the "Greek serenity" of later Greek periods be only a red sunset? Could the Epicurean will hostile to pessimism be merely the prudence of a suffering man? And even scientific enquiry itself, our science—indeed, what does all scientific enquiry in general mean considered as a symptom of life? What is the point of all that science and, even more serious, where did it come from? What about that? Is scientific scholarship perhaps only a fear and an excuse in the face of pessimism, a delicate self-defence against—the Truth? And speaking morally, something like cowardice and falsehood? Speaking unmorally, a clever trick? Oh, Socrates, Socrates, was that perhaps your secret? Oh you secretive ironist, was that perhaps your—irony?</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">2</div>
+    <p>What I managed to seize upon at that time, something fearful and dangerous, was a problem with horns (not necessarily a bull exactly, but in any event a new problem). Today I would state that it was the problem of scholarship itself, scholarly research for the first time grasped as problematic, as dubious. But that book, in which my youthful courage and suspicion then spoke, what an impossible book had to grow out of a task so contrary to the spirit of youth!</p>
+    <p>Created out of merely premature and really immature personal experiences, which lay close to the threshold of something communicable, and built on the basis of art (for the problem of scientific research cannot be understood on the basis of scientific enquiry)—a book perhaps for artists with analytical tendencies and a capacity for retrospection (that means for exceptions, a type of artist whom it is necessary to seek out and whom one never wants to look for), full of psychological innovations and artists' secrets, with an artist's metaphysics in the background, a youthful work full of the spirit of youth and the melancholy of youth, independent, defiantly self-sufficient as well, even where it seemed to bow down with special reverence to an authority—in short, a first work also in the bad sense of the word, afflicted, in spite of the antiquity of the problem, with every fault of youth, above all with its excessive verbiage and its storm and stress.</p>
+    <p>On the other hand, looking back on the success the book had (especially with the great artist to whom it addressed itself, as if in a conversation, that is, with Richard Wagner), the book proved itself—I mean it was the sort of book which at any rate was effective enough among "the best people of its time." For that reason the book should at this point be handled with some consideration and discretion. However, I will not totally hide how unpleasant the book seems to me now, how strangely after sixteen years it stands there in front of me, an older man, a hundred times more discriminating, but with eyes which have not grown colder in the slightest. The issue which that bold book dared to approach for the first time has itself become no more remote: to look at scientific enquiry from the perspective of the artist, but to look at art from the perspective of life. . . .</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">3</div>
+    <p>Let me say again: today for me it is an impossible book. I call it something poorly written, ponderous, painful, with fantastic and confused imagery, here and there so saccharine it is effeminate, uneven in tempo, without any impulse for logical clarity, extremely self-confident and thus dispensing with evidence, even distrustful of the relevance of evidence, like a book for the initiated, like "Music" for those baptized in music, those who are bound together from the start in secret and esoteric aesthetic experiences, a secret sign recognized among artistic blood relations, an arrogant and rhapsodic book, which right from the start hermetically sealed itself off from the profane vulgarity of the "intelligentsia" even more than from the "people," but a book which, as its effect proved and continues to prove, must also understand enough of this issue to search out its fellow rhapsodists and tempt them to new secret paths and dancing grounds.</p>
+    <p>At any rate here a strange voice spoke (curious people understood that, as did those who found it distasteful), the disciple of an as yet unknown God, who momentarily hid himself under the hood of a learned man, under the gravity and dialectical solemnity of the German man, even under the bad manners of the followers of Wagner. Here was a spirit with alien, even nameless, needs, a memory crammed with questions, experiences, secret places, beside which the name Dionysus was written like a question mark. Here spoke (so people told themselves suspiciously) something like a mystic and an almost maenad-like soul, which stammered with difficulty and arbitrarily, as if talking a foreign language, almost uncertain whether it wanted to communicate something or remain silent. This "new soul" should have sung, not spoken! What a shame that I did not dare to utter as a poet what I had to say at that time. Perhaps I might have been able to do that! Or at least as a philologist—even today in this area almost everything is still there for philologists to discover and dig up, above all the issue that there is a problem right here and that the Greeks will continue remain, as before, entirely unknown and unknowable as long as we have no answer to the question, "What is the Dionysian?"</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">4</div>
+    <p>Indeed, what is the Dionysian? This book offers an answer to that question: a "knowledgeable person" speaks there, the initiate and disciple of his own god. Perhaps I would now speak with more care and less eloquently about such a difficult psychological question as the origin of tragedy among the Greeks. A basic issue is the relationship of the Greeks to pain, the degree of their sensitivity. Did this relationship remain constant? Or did it turn itself around? That question whether their constantly strong desire for beauty, feasts, festivities, and new cults arose out of some lack, deprivation, melancholy, or pain. If we assume that this desire for the beautiful and the good might be quite true—and Pericles, or, rather, Thucydides, in the great Funeral Oration gives us to understand that it is—where must that contradictory desire stem from, which appears earlier than the desire for beauty, namely, the desire for the ugly or the good strong willing of the ancient Hellenes for pessimism, for tragic myth, for pictures of everything fearful, angry, enigmatic, destructive, and fateful as the basis of existence? Where must tragedy come from? Perhaps out of desire, out of power, out of overflowing health, out of overwhelming fullness of life?</p>
+    <p>And psychologically speaking, what then is the meaning of that madness out of which tragic as well as comic art grew, the Dionysian madness? What? Is madness perhaps not necessarily the symptom of degradation, collapse, cultural decadence? Is there perhaps (a question for doctors who treat madness) a neurosis associated with health, with the youth of a people, and with youthfulness? What is revealed in that synthesis of god and goat in the satyr? Out of what personal experience, what impulse, did the Greeks have to imagine the Dionysian enthusiast and original man as a satyr? And what about the origin of the tragic chorus?</p>
+    <p>In those centuries when the Greek body flourished and the Greek soul bubbled over with life, perhaps there were endemic raptures, visions, and hallucinations which entire communities, entire cultural bodies, shared. What if it were the case that the Greeks, right in the midst of their rich youth, had the desire for tragedy and were pessimists? What if it was clearly lunacy, to use a saying from Plato, which brought the greatest blessings throughout Hellas?</p>
+    <p>And, on the other hand, what if, to turn the issue around, it was clearly during the time of their dissolution and weakness that the Greeks became constantly more optimistic, more superficial, more hypocritical, with a lust for logic and rational understanding of the world, as well as "more cheerful" and "more scientific"? What's this? In spite of all "modern ideas" and the judgments of democratic taste, could the victory of optimism, the developing hegemony of reasonableness, practical and theoretical utilitarianism, as well as democracy itself (which occurs in the same period) perhaps be a symptom of failing power, approaching old age, physiological exhaustion, all these factors rather than pessimism? Was Epicurus an optimist for the very reason that he was suffering? We see that this book was burdened with an entire bundle of difficult questions. Let us add its most difficult question: What, from the point of view of living, does morality mean?</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">5</div>
+    <p>The preface to Richard Wagner already proposed that art, and not morality, was the essential metaphysical human activity, and in the book itself there appears many times over the suggestive statement that the existence of the world is justified only as an aesthetic phenomenon. In fact, the entire book recognizes only an aesthetic sense and a deeper meaning under everything that happens, a "God," if you will, but certainly only a totally unthinking and amoral artist-God, who in creation and destruction, in good things and bad, dispassionately desires to become aware of his own pleasures and power, a God who, as he creates worlds, rids himself of the strain of fullness and superfluity, from the suffering of pressing internal contradictions. The world is at every moment the attained manifestation of God, as the eternally changing, eternally new vision of the person who suffers most, who is the most rent with contradictions, the one with the richest sense of protest, who knows how to save himself only in illusion.</p>
+    <p>People may call this entire artistic metaphysic arbitrary, pointless, and fantastic, but the essential point about it is that it already betrays a spirit which will at some point establish itself on that dangerous ground and make a stand against the moralistic interpretation and moral meaningfulness of existence. Here is announced, perhaps for the first time, a pessimism "beyond good and evil." Here comes that "perversity in belief" in word and formula against which Schopenhauer never grew tired of hurling his angriest curses and thunderstones in advance, a philosophy which dared to place morality itself in the world of phenomena and so to subsume it, not under the "visions" (in the sense of some idealistic end point) but under "illusions," as an appearance, delusion, fallacy, interpretation, something made up, a work of art.</p>
+    <p>Perhaps we can best gauge the depth of this tendency hostile to morality from the careful and hostile silence with which Christianity is treated in the entire book, Christianity as the most excessive and thorough figuring out of a moralistic theme which humanity has ever had available to listen to. To tell the truth, there is nothing which stands more in opposition to the purely aesthetic interpretation and justification of the world, as it was set out in this book, than Christian teaching, which is and will remain merely moralistic and which, with its absolute moral standards (for example, with its truthfulness of God), relegates art to the realm of lies—in other words, which denies art, condemns it, and passes sentence on it.</p>
+    <p>Behind such a way of thinking and evaluating, which must be hostile to art, so long as it is in any way consistent, I always perceived also a hostility to life, the wrathful, vengeful aversion to life itself. For all life rests on appearance, art, illusion, optics, the need for perspective and for error. Christianity was from the start essentially and thoroughly disgust and weariness with life, which only dressed itself up, only hid itself in, only decorated itself with the belief in an "other" or "better" life. The hatred of the "world," the curse against the emotions, the fear of beauty and sensuality, a world beyond created so that the world on this side might be more easily slandered, at bottom a longing for nothingness, for extinction, for rest, until the "Sabbath of all Sabbaths"—all that, as well as the absolute desire of Christianity to value only moral worth, has always seemed to me the most dangerous and most eerie form of all possible manifestations of a "Will to Destruction," at least a sign of the deepest illness, weariness, bad temper, exhaustion, and impoverishment in living.</p>
+    <p>For in the eyes of morality (and particularly Christian morality, that is, absolute morality) life must be seen as constantly and inevitably wicked, because life is something essentially amoral. Hence, pressed down under this weight of contempt and eternal No's, life must finally be experienced as something not worth desiring, as something worthless. And what about morality itself? Isn't morality a "desire for the denial of life," a secret instinct for destruction, a principle of decay, diminution, and slander, a beginning of the end, and thus, the greatest of all dangers?</p>
+    <p>And so, my instinct at that time turned itself against morality in this questionable book, as an instinctual affirmation of life, and a fundamentally different doctrine, a totally opposite way of evaluating life, was invented, something purely artistic and anti-Christian. What should it be called? As a philologist and man of words, I baptized it, taking some liberties (for who knew the correct name for the Antichrist?), after the name of a Greek god: I called it the Dionysian.</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">6</div>
+    <p>Do people understand the nature of the task I dared to stir up with this book? . . . How much I now regret the fact that at the time I didn't have the courage (or the presumptuousness?) to consider allowing myself a personal language appropriate to such an odd point of view and such a daring exploit—that I sought laboriously to express strange and new evaluations with formulas from Schopenhauer and Kant—something which basically went quite against the spirit of Kant and Schopenhauer, as well as against their tastes!</p>
+    <p>What then did Schopenhauer think about tragedy? He says, "What gives all tragedies their characteristic drive for elevation is the working out of the recognition that the world and life cannot provide any just satisfactions, and thus our devotion to it is not worthwhile; the tragic spirit lives on in that insight, and it leads from there to resignation" (<em>The World as Will and Idea</em>, II, 495). Oh, how differently Dionysus speaks to me! Oh, how far from me then was just this entire doctrine of resignation!—</p>
+    <p>But there is something much worse about my book, something which I regret even more than to have obscured and spoiled my Dionysian premonitions with formulas from Schopenhauer: namely, that I generally ruined for myself the magnificent problem of the Greeks, as it arose in me, by mixing it up with the most modern issues! I regret that I tied myself to hopes where there was nothing to hope for, where everything indicated all too clearly an end point! I regret that, on the basis of the most recent German music, I began to tell stories of the "German character," just as if that character might be about to discover itself, to find itself again. And all that at a time when the German spirit (which not so long before had the desire to rule Europe and the power to assume leadership of Europe) was, as its last will and testament, abdicating and, beneath the ostentatious pretext of founding an empire, making the transition to a negotiated moderation, to democracy and "modern ideas"!</p>
+    <p>As a matter of fact, in the intervening years I have learned to think of that "German character" without any hope and without mercy—similarly with German music, which is Romantic through and through and the most un-Greek of all possible art forms, and besides that, the worst sort of narcotic, doubly dangerous among a people who love drink and honour lack of clarity as a virtue, because that has the dual character of a drug which simultaneously intoxicates and befuddles the mind. Of course, set apart from all the rash hopes and the defective practical applications to present times with which I then ruined my first book, the great Dionysian question mark remains still standing, as it is set out there (also in relation to music): How should a music be created which is no longer Romantic in origin (like the German) but Dionysian?</p>
+  </div>
+
+  <div class="essay-section">
+    <div class="essay-num">7</div>
+    <p>But, my dear sir, what in the earth is Romantic if your book is not? Can the deep hatred against modernism, reality, and modern ideas go any further than it does in your artists' metaphysics, which would sooner believe in nothingness or the devil than in the here and now? Does not a fundamental bass note of anger and desire for destruction rumble underneath all your contrapuntal vocal art and seductive sounds, a raging determination in opposition to everything contemporary, a desire which is something not too distant from practical nihilism and which seems to say "I'd rather that nothingness were the truth than that you were right, than that your truth was justified!"</p>
+    <p>Listen to yourself, my pessimistic gentleman and worshipper of art, listen with open ears to a single selected passage from your book, to that not ineloquent passage about the dragon killer, who may sound like an awkward pied piper to those with young ears and hearts. What? Is your book not a true and justified Romantic declaration of 1830, under the mask of the pessimism of 1850, behind which is already playing the prelude to the usual Romantic finale—break, collapse, return, and prostration before an ancient belief, before the old gods. . . . What? Isn't your book of pessimism itself an anti-Greek and Romantic piece, even something "as intoxicating as it is befuddling," in any event, a narcotic, even a piece of music, German music? Listen to the following:</p>
+
+    <div class="quote-passage">
+      <p>Let's picture for ourselves a generation growing up with this fearlessness in its gaze, with this heroic push into what is monstrous; let's picture for ourselves the bold stride of these dragon slayers, the proud audacity with which they turn their backs on all the doctrines of weakness associated with optimism, so that they live with resolution, fully and completely. Would it not be necessary for the tragic man of this culture, having trained himself for what is serious and frightening, to desire a new art, an art of metaphysical consolation, tragedy as his own personal Helen of Troy, and to have to cry out with Faust:</p>
+      <p class="couplet">And should I not, through my power to yearn,<br>Drag into life that most extraordinary form?</p>
+    </div>
+
+    <p>"Would it not be necessary?" . . . No, three times no! you young Romantics: it should not be necessary! But it is very likely that things will end up—that you will end up—being consoled, as is written, in spite of all the self-training for what is serious and frightening, "metaphysically consoled," as Romantics tend to finish up, as Christians. No! You should for the time being learn the art of consolation in this life: you should learn to laugh, my young friends, even if you wish to remain thoroughly pessimistic. From that, as laughing people, some day or other perhaps you will ship all that metaphysical consolation to the devil—and then away with metaphysics! Or, to speak the language of that Dionysian fiend called Zarathustra:</p>
+
+    <div class="stanza-block">
+      <p class="stanza">"Lift up your hearts, my brothers, high, higher! And for my sake don't forget your legs! Raise up your legs, you fine dancers, and better yet, stand on your heads!"</p>
+      <p class="stanza">"This crown of the man who laughs, this crown wreathed with roses—I have placed this crown on myself. I speak out my holy laughter to myself. Today I found no one else strong enough for that."</p>
+      <p class="stanza">"Zarathustra the dancer, Zarathustra the light hearted, who beckons with his wings, a man ready to fly, hailing all birds, prepared and ready, a careless and blessed man."</p>
+      <p class="stanza">"Zarathustra the truth-teller, Zarathustra the true laugher, not an impatient man, not a man of absolutes, someone who loves jumps and leaps to the side—I placed the crown on myself!"</p>
+      <p class="stanza">"This crown of the laughing man, this crown of rose wreaths: my brothers I throw this crown to you! Laughter I declare sacred: you higher men, for my sake learn to laugh!"</p>
+    </div>
+
+    <p class="signature">August 1886</p>
+  </div>
+
+</main>
+
+<footer>
+  <span class="brand">Ukubona</span>
+  <span class="ts">"Ukubona" means to see, to witness — to look into the mirror.<br>© 2025 Ukubona LLC · vCard · Johns Hopkins Enterprise Vendor (June 2025)</span>
+</footer>
+
+<script>
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('theme-btn');
+  var curr = 'dark';
+  function apply(t){
+    curr = t;
+    html.setAttribute('data-theme', t);
+    btn.textContent = t === 'dark' ? 'light' : 'dark';
+  }
+  btn.addEventListener('click', function(){ apply(curr === 'dark' ? 'light' : 'dark'); });
+  apply('dark');
+})();
+</script>
+
+</body>
+</html>
